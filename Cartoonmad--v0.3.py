@@ -2,9 +2,11 @@ import requests,time,os,re
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 '''
-可能存在的bug：
+存在的一些问题：
+之前的pages_number改过之后打包字典Dict完全不需要
 直接输入图源id可能地址不对,就需要输入完全
 若漫画名末尾有？！。这些特殊符号，可能导致路径设置失效
+若是以卷命名,又选择性下载一定会报错!!!!
 '''
 headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
@@ -30,7 +32,7 @@ if Manga_name[-1]=='?':
 B=bs.find_all('a',{'target':'_blank','href':re.compile('/comic/.*?.html')})
 chapters_name=[b.string for b in B]
 chapters_list=['https://www.cartoonmad.com'+ b['href'] for b in B]
-Dict=dict(zip(chapters_list,chapters_name))
+Dict=dict(zip(chapters_list,chapters_name))#把每一话名和链接打包为字典
 print('<<{}>>总共有{}话'.format(Manga_name,len(Dict)))
 
 #直接在主页获取每话页数
@@ -58,7 +60,7 @@ def donwload(url_lsit,chapter,url_name,image_site,n):
         with open('./%s/%s/%s' %(Manga_name,url_name,name), 'wb') as f:
             f.write(r.content)
     print('---------%s下载成功-------！'%url_name)
-
+#可选择下载功能
 choice=input('全下载还是选择性下载，前者选0，后者为1----')
 if choice=='1':
     x=input('从第几话开始下载(纯数字)---')
@@ -74,7 +76,7 @@ else:
     n=0
     pass
 if __name__ == '__main__':
-    executor = ThreadPoolExecutor(max_workers=5)
+    executor = ThreadPoolExecutor(max_workers=5)#设置线程数量
     for D in Dict:
         n += 1
         chapter=('%03d' % n)
