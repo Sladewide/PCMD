@@ -1,3 +1,5 @@
+#未完成，有空再继续 2020.12.6 19:34
+#点击似乎有问题，重复循环  多个课目切换未完成
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
