@@ -7,8 +7,8 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 xh='课程地址'
-name='2018220448'
-password='227213'
+name=''
+password=''
 wd = webdriver.Edge(r'F:/Python/edgedriver.exe')#声明浏览器
 actionOpenLinkInNewTab = ActionChains(wd)#加入动作
 wd.implicitly_wait(2)
