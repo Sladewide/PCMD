@@ -49,7 +49,7 @@ for i in range(len(LIST1)):
         cofirm_button=wd.find_element_by_id("saveButton").click()
         
         wd.switch_to.alert.accept()#确认保存
-        sleep(0.8)#缓冲时间————以确保保存成功
+        sleep(0.4)#缓冲时间————以确保保存成功
         wd.close()#关闭当前标签页
         wd.switch_to_window(n[0])
 #——————课程评价——————
